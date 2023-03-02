@@ -1,0 +1,216 @@
+#Hàm tạo menu:
+def menu():
+    x=  "*********************************************"
+    y = "*********CHƯƠNG TRÌNH HỌC THÔNG MINH*********"
+    z = "*********************************************"
+    print(x)
+    print(y)
+    print(z)
+    print()
+    print("   ============== MENU ==============   ")
+    print( "Xin vui lòng chọn: " )
+    print("1. Xem lịch" )
+    print("2. Tính lương" )
+    print("3. Xem lương" )
+    print("4. Xem thông tin nhân viên" )
+    print("5. Tính điểm của học sinh") 
+    print("6. Học bổng ")
+    print("7. Kiểm tra mật khẩu sinh viên")
+    print("8. Thoát chương trình")
+    print("Vui lòng chọn số từ 1-8:")
+#Hàm xem lịch:
+def xemlich (months):
+    list1 =[1,3,5,7,8,10,12]
+    list2 =[4,6,9,11]
+    if months in list1:
+        return 31
+    elif months in list2:
+        return 30
+    elif months == 2:
+        return 2829
+#Hàm tính lương"
+def tinhLuong(luong, gio):
+    tienLuong=0
+    if gio > 40:
+        tienLuong=luong*40+ (gio-40)*1.5*luong
+    else:
+        tienLuong=luong*gio
+    return tienLuong
+#Hàm xem lương
+def sapXep (n):
+    danhSach=[]
+    min=0
+    while n<1:
+        n=int(input("Nhập lại số lượng nhân viên:"))
+    else:
+        for i in range (1,n+1):
+            print("Nhập lương nhân viên thứ",i,":",end="")
+            val=int(input())
+            danhSach.append(val)
+    for i in range (n):
+        for j in range (i+1,n):
+            if danhSach[i]> danhSach[j]:
+                min=danhSach[i]
+                danhSach[i]=danhSach[j]
+                danhSach[j]=min
+    return danhSach
+#Hàm in tên:
+def check(name):
+    index=0
+    for j in range (len(name)):
+        if name[j]==" ":
+            index=j
+    return index
+#Hàm tính điểm trung bình:
+def Diemtb(tongSoMon):
+    while tongSoMon<0:
+        tongSomon=int(input("Nhập lại "))
+    tongHeso=0
+    tongDiem=0
+    list=[1,1.5,2,2.5,3]
+    for n in range(tongSoMon):
+        kiemTra=True
+        while kiemTra:
+            print("Nhập điểm môn học",n+1,": ",end="")
+            Diem=float(input())
+            if Diem >=0 and Diem<=10:
+                kiemTra=False
+        kiemTra=True
+        while kiemTra:
+            print("Nhập hệ số môn học",n+1,": ",end="")
+            Heso=float(input())
+            if Heso in list:
+                kiemTra=False
+            tongHeso= tongHeso + Heso
+        tongDiem= tongDiem+ (Diem*Heso)
+            
+    DTB=tongDiem/tongHeso
+    print("Số môn học:",tongSoMon)
+    print("Tổng số hệ số: ",tongHeso)
+    print("Điểm trung bình của",tongSoMon,"môn học: ",format(DTB,".2f"))
+#Hàm xét học bổng:
+def hocBong(n):
+    list=[]
+    list2=[]
+    while n<1:
+        n=int(input("Nhập lại số học sinh cần xét học bổng:"))
+    for i in range (n):
+        print("Nhập tên sinh viên thứ",i+1,":",end="")
+        tenSinhVien=input()
+        diemSo=float(input("Nhập điểm tổng kết:"))
+        if diemSo >=8.5:
+            list.append(diemSo)
+            list2.append(tenSinhVien)
+    for i in range (len(list)):
+        print("Sinh viên",list2[i],"đạt học bổng với điểm số:",list[i])
+    
+#Hàm kiểm tra mật khẩu sinh viên có hợp lệ không:
+
+def matKhau(n):
+    list=['0','1','2','3','4','5','6','7','8','9']
+    list2=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','t','s','u','y','w','v','x','z']
+    list3=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','T','S','U','Y','W','V','X','Z']
+    list4=['#','@','!','~','`','%','^','&','*','(',')','-','_','+','=',',','.','<','>','?','/','"',"'",':',';','|',"'",'{','}','[',']'] 
+    count1=0
+    count2=0
+    count3=0
+    count4=0
+    while n <1:
+        n=int(input("Nhập lại số sinh viên cần kiểm tra mật khẩu: "))
+    for i in range (n):
+        print("Mời bạn nhập mật khẩu thứ", i+1,": ",end="")
+        sVPass=input()
+        if 8<= len(sVPass)<=16:
+            for i in range (len(sVPass)):
+                count1=count1 + list.count(sVPass[i])
+            for i in range (len(sVPass)):
+                count2=count2 + list2.count(sVPass[i])
+            for i in range (len(sVPass)):
+                count3=count3 + list3.count(sVPass[i])
+            for i in range (len(sVPass)):
+                count4=count4 + list4.count(sVPass[i])
+            if count1>=1 and count2>=1 and count3>=1 and count4>=1:
+                print("Mật khẩu mạnh")
+            elif count1 <1:
+                print("Mật khẩu yếu. Mật khẩu nên có ít nhất 1 chữ số")
+            elif count2<1:
+                print("Mật khẩu yếu. Mật khẩu nên có ít nhất 1 chữ cái thường")
+            elif count3<1:
+                print("Mật khẩu yếu. Mật khẩu nên có ít nhất 1 chữ cái hoa")
+            elif count4 <1:
+                print("Mật khẩu yếu. Mật khẩu nên có ít nhất 1 kí tự đặc biệt")
+
+        else:
+            print("Mật khẩu phải dài từ 8 đến 16 kí tự")
+                
+        count1=0
+        count2=0
+        count3=0
+        count4=0
+
+#Chương trình chính:
+while True:
+    menu()
+    list=[1,2,3,4,5,6,7,8]
+    choose=int(input())
+    while choose not in list:
+        choose=input("Xin vui lòng chọn lại(1-8): ")
+
+    if choose==1:
+    
+        months=int(input("Nhập tháng: "))
+        while months<1 or months> 12:
+            months=int(input("Nhập lại tháng: "))
+        if xemlich(months)==31:
+            print("Tháng",months,"có 31 ngày")
+        elif xemlich(months)==30:
+            print("Tháng",months,"có 30 ngày")
+        elif xemlich(months)==2829:
+            years=int(input("Hãy nhập năm:"))
+            if years %4 ==0 and years %100 !=0:
+                print("Tháng",months,"có 29 ngày")
+            else:
+                print("Tháng",months,"có 28 ngày")
+
+    elif choose==2:
+        kiemTra=True
+        while kiemTra:
+            gio=float(input("Nhập số giờ làm: "))
+            luong=float(input("Nhập mức lương: "))
+            if gio>=0 and luong>=0:
+                kiemTra=False
+        else:
+            print("Tiền lương là: ",tinhLuong(luong,gio))
+
+    elif choose == 3:
+        n=int(input("Nhập số lượng nhân viên:"))
+        print("Danh sách lương đã sắp xếp theo thứ tự tăng dần:",sapXep(n))
+
+    elif choose == 4:
+        name=input("Nhập họ tên: ")
+        viTri=check(name)
+        print("Tên của nhân viên là:",(name[viTri+1:]).title())
+        print("Họ và tên đệm:",(name[:viTri]).title())
+        print("Họ và tên đầy đủ:",name.title())
+
+    elif choose == 5:
+        tongSoMon=int(input("Tổng số môn học cần tính DTB: "))
+        Diemtb(tongSoMon)
+
+    elif choose==6:
+        n=int(input("Nhập số sinh viên cần xét học bổng:"))
+        hocBong(n)
+
+    elif choose==7:
+        print("Lưu ý: Mật khẩu mạnh nên có đầy đủ chữ hoa, chữ thường, số và kí tự đặc biệt")
+        n=int(input("Nhập số mật khẩu cần kiểm tra: "))
+        matKhau(n)
+    else :
+        print("Cảm ơn bạn đã sử dụng chương trình")
+        print("Bạn có muốn tiếp tục sử dụng chương trình không? (yes or no)")
+        answer=input("Nhập câu trả lời của bạn: ")
+        if answer=="yes":
+            menu()
+            continue
+        elif answer=="no":
+            break
